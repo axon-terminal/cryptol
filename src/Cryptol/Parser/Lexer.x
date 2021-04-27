@@ -116,6 +116,7 @@ $white+                   { emit $ White Space }
 "as"                      { emit $ KW KW_as }
 "hiding"                  { emit $ KW KW_hiding }
 "newtype"                 { emit $ KW KW_newtype }
+"signature"               { emit $ KW KW_signature }
 
 "infixl"                  { emit $ KW KW_infixl }
 "infixr"                  { emit $ KW KW_infixr }

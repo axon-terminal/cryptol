@@ -84,6 +84,7 @@ import Paths_cryptol
   'if'        { Located $$ (Token (KW KW_if     ) _)}
   'then'      { Located $$ (Token (KW KW_then   ) _)}
   'else'      { Located $$ (Token (KW KW_else   ) _)}
+  'signature' { Located $$ (Token (KW KW_signature) _)}
   'x'         { Located $$ (Token (KW KW_x)       _)}
 
   'primitive' { Located $$ (Token (KW KW_primitive) _)}
@@ -251,7 +252,15 @@ vtop_decl               :: { [TopDecl PName] }
   | parameter_decls        { $1                                               }
   | mbDoc 'submodule'
     module_def             {% ((:[]) . exportModule $1) `fmap` mkNested $3 }
+
+  | mbDoc sig_def          { [mkSigDecl $1 $2]  }
   | import                 { [DImport $1] }
+
+sig_def ::                 { Signature PName }
+  : 'signature' name 'where' 'v{' par_decls 'v}'
+                           { mkSignature $2 $5 }
+
+ 
 
 top_decl                :: { [TopDecl PName] }
   : decl                   { [Decl (TopLevel {tlExport = Public, tlValue = $1 })] }
