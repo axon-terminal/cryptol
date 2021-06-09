@@ -208,10 +208,11 @@ jobs:
             target: ''
             os: macos-latest
             continue-on-error: false
-          - suite: rpc
-            target: ''
-            os: windows
-            continue-on-error: true  # TODO: get Python client to work on Windows
+          # Something about this is breaking the CI runner :|, disabling for now
+          # - suite: rpc
+          #   target: ''
+          #   os: windows
+          #   continue-on-error: true  # TODO: get Python client to work on Windows
     steps:
       - uses: actions/checkout@v2
         with:
